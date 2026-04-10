@@ -20,14 +20,12 @@ from components.customer_detail import render_customer_detail
 def main():
     st.title("📊 Customer 360 — Churn Prediction Dashboard")
 
-    # load stats
     try:
         stats = requests.get(f"{API_URL}/stats").json()
     except Exception:
-        st.error("Không kết nối được API. Đảm bảo FastAPI đang chạy.")
+        st.error("Cannot connect to API. Make sure FastAPI is running.")
         return
 
-    # === Tab layout ===
     tab1, tab2, tab3 = st.tabs(["📈 Overview", "🚨 Risk List", "🔍 Customer Detail"])
 
     with tab1:
@@ -42,25 +40,24 @@ def main():
         render_churn_by_state(stats)
 
     with tab2:
-        st.subheader("Danh sách khách hàng theo risk")
+        st.subheader("Customer list by risk level")
         risk_filter = st.selectbox(
-            "Filter theo risk level:",
+            "Filter by risk level:",
             ["All", "Critical", "High", "Medium", "Low"]
         )
         df = render_risk_table(risk_filter)
 
-        # click vào row để xem detail
         if df is not None and not df.empty:
             selected_id = st.selectbox(
-                "Chọn customer để xem chi tiết:",
+                "Select a customer to view details:",
                 options=[""] + df["customer_id"].tolist()
             )
             if selected_id:
                 render_customer_detail(selected_id)
 
     with tab3:
-        st.subheader("Tìm kiếm khách hàng")
-        customer_id = st.text_input("Nhập Customer ID:")
+        st.subheader("Customer lookup")
+        customer_id = st.text_input("Enter Customer ID:")
         if customer_id:
             render_customer_detail(customer_id)
 

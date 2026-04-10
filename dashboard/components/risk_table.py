@@ -20,21 +20,20 @@ def render_risk_table(risk_filter=None):
     data = resp.json()
 
     df = pd.DataFrame(data["data"])
-    st.caption(f"Tổng: {data['total']:,} khách hàng")
+    st.caption(f"Total: {data['total']:,} customers")
 
     if df.empty:
-        st.info("Không có dữ liệu.")
+        st.info("No data available.")
         return df
 
-    # format hiển thị
     display_df = df[[
         "customer_id", "customer_city", "customer_state",
         "churn_probability", "risk_level", "frequency",
         "avg_review_score", "action"
     ]].copy()
 
-    display_df["risk_level"]        = display_df["risk_level"].map(
-        lambda x: f"{RISK_COLOR.get(x, '')} {x}"
+    display_df["risk_level"] = display_df["risk_level"].map(
+        lambda x: f"{RISK_COLOR.get(x, '')} {x.upper()}"
     )
     display_df["churn_probability"] = display_df["churn_probability"].map(
         lambda x: f"{x:.1%}"
@@ -42,7 +41,7 @@ def render_risk_table(risk_filter=None):
     display_df.columns = [
         "Customer ID", "City", "State",
         "Churn Prob", "Risk", "Orders",
-        "Avg Review", "Action"
+        "Avg Review", "Recommended Action"
     ]
 
     st.dataframe(display_df, use_container_width=True, height=400)
