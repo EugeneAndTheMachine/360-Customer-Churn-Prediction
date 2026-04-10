@@ -1,0 +1,109 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# MLflow
+mlruns/
+.mlflow/
+ml/mlruns/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+*.ipynb
+
+# Logs
+logs/
+*.log
+*.logs
+
+# Data files (keep sample data, ignore large raw data)
+data/*.csv
+!data/README.md
+
+# ML artifacts
+ml/models/
+ml/predictions.csv
+ml/feature_importance.json
+ml/explain_*.json
+ml/shap_*.png
+
+# Dashboard outputs
+dashboard/predictions.csv
+dashboard/feature_importance.json
+
+# API outputs
+api/predictions.csv
+api/feature_importance.json
+api/explain_*.json
+api/shap_*.png
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres_data/
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# Environment variables (NEVER commit .env with secrets)
+.env
+.env.local
+.env.*.local
+
+# OS
+Thumbs.db
+.DS_Store
+*.tmp
+
+# DBT artifacts
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+
+# Ingestion outputs
+ingestion/__pycache__/
+
+# Airflow
+airflow/logs/
+airflow/*.log
